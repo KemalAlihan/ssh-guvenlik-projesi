@@ -43,12 +43,12 @@ Bu proje, SSH sunucusuna yapılan brute-force saldırılarını tespit ederek IP
   /etc/fail2ban/jail.local yapılandırması:
   ini
 
-  -[sshd]
-  -enabled = true
-  -port = 22
-  -maxretry = 3
-  -bantime = 600
-  -findtime = 600
+    [sshd]
+    enabled = true
+    port = 22
+    maxretry = 3
+    bantime = 600
+    findtime = 600
 
 ## Servis başlatma:
 
@@ -65,25 +65,22 @@ Bu proje, SSH sunucusuna yapılan brute-force saldırılarını tespit ederek IP
     sudo dpkg-reconfigure iptables-persistent
 
 ### 3.3. Bash Betikleri
-  ip_kara_liste.sh: IP’leri iptables ile engeller.
-  
+  ## ip_kara_liste.sh: IP’leri iptables ile engeller.
 
-#!/bin/bash
-#ip_kara_liste.sh
+    #ip_kara_liste.sh
 
-BLACKLIST_IP=$1
-if [ -z "$BLACKLIST_IP" ]; then
-    echo "Hata: Engellenecek IP adresini belirtin."
-    exit 1
-fi
-sudo iptables -A BLACKLIST -s "$BLACKLIST_IP" -j DROP
-echo "IP $BLACKLIST_IP engellendi."
-
-bildirim_engellenen_ipler.sh: Engellenen IP’ler için e-posta bildirimi gönderir.
-bash
-
-#!/bin/bash
-# bildirim_engellenen_ipler.sh
+    BLACKLIST_IP=$1
+    if [ -z "$BLACKLIST_IP" ]; then
+        echo "Hata: Engellenecek IP adresini belirtin."
+        exit 1
+    fi
+    sudo iptables -A BLACKLIST -s "$BLACKLIST_IP" -j DROP
+    echo "IP $BLACKLIST_IP engellendi."
+    
+  ## bildirim_engellenen_ipler.sh: Engellenen IP’ler için e-posta bildirimi gönderir.
+    
+    # bildirim_engellenen_ipler.sh
+    
     BLACKLIST_IP=$1
     RECIPIENT="ornek@email.com"
     SUBJECT="IP Engelleme Bildirimi"
@@ -91,6 +88,7 @@ bash
     echo "$BODY" | mail -s "$SUBJECT" "$RECIPIENT"
 
 ## Cron Job: Bildirim betiğini her 5 dakikada çalıştırmak için:
+
     crontab -e
     */5 * * * * /path/to/bildirim_engellenen_ipler.sh <blacklist_ip>
 
@@ -111,7 +109,7 @@ bash
 
   
 ### 7. Sonuç
-  -Proje, VirtualBox üzerinde Ubuntu Server kullanılarak SSH güvenliğini artırmak için Fail2Ban ve iptables ile IP kara listesi oluşturmayı başardı. Bildirim      sistemi, engellemelerin anlık takibini mümkün kıldı.
+Proje, VirtualBox üzerinde Ubuntu Server kullanılarak SSH güvenliğini artırmak için Fail2Ban ve iptables ile IP kara listesi oluşturmayı başardı. Bildirim      sistemi, engellemelerin anlık takibini mümkün kıldı.
 
 #### **Raporu GitHub’a Yükleme**
 ## 1. **Dosyaları Hazırlayın**:
