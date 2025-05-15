@@ -29,12 +29,11 @@ Bu proje, SSH sunucusuna yapılan brute-force saldırılarını tespit ederek IP
   - Yerel makineden SSH bağlantısı: `ssh ubuntu@<vm_ip>`.
 
 ### 3.2. Yazılım Kurulumu
-- **OpenSSH Kurulumu**:
-  ```bash
-  sudo apt update
-  sudo apt install openssh-server
-  sudo systemctl enable ssh
-  sudo systemctl start ssh
+ ## OpenSSH Kurulumu
+    sudo apt update
+    sudo apt install openssh-server
+    sudo systemctl enable ssh
+    sudo systemctl start ssh
 
 ## Fail2Ban Kurulumu:
 
@@ -108,7 +107,7 @@ Bu proje, SSH sunucusuna yapılan brute-force saldırılarını tespit ederek IP
   -Proje dosyaları: https://github.com/KemalAlihan/ssh-guvenlik-projesi.git
 
   
-### 7. Sonuç
+### 6. Sonuç
 Proje, VirtualBox üzerinde Ubuntu Server kullanılarak SSH güvenliğini artırmak için Fail2Ban ve iptables ile IP kara listesi oluşturmayı başardı. Bildirim      sistemi, engellemelerin anlık takibini mümkün kıldı.
 
 #### **Raporu GitHub’a Yükleme**
@@ -120,8 +119,8 @@ Proje, VirtualBox üzerinde Ubuntu Server kullanılarak SSH güvenliğini artır
 ## 2. **Git Komutları**:
     sudo apt install git
     git init
-    git add README.md ip_kara_liste.sh bildirim_engellenen_ipler.sh jail.local screenshots/
+    git add README.md ip_kara_liste.sh bildirim_engellenen_ipler.sh jail.local
     git commit -m "Add project report and files"
-    git remote add origin https://github.com/<kullanici_adi>/ssh-guvenlik-projesi.git
+    git remote add origin https://github.com/KemalAlihan/ssh-guvenlik-projesi.git
     git push -u origin main
 
