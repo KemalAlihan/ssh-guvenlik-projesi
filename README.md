@@ -125,7 +125,7 @@ Satır olarak eklenir:
 ## 5. GitHub Reposu
 
 Proje dosyaları:  
-[https://github.com/KULLANICI/ssh-guvenlik-projesi.git](https://github.com/KULLANICI/ssh-guvenlik-projesi.git)
+[https://github.com/KemalAlihan/ssh-guvenlik-projesi.git](https://github.com/KemalAlihan/ssh-guvenlik-projesi.git)
 
 ## 6. Sonuç
 
@@ -144,6 +144,6 @@ sudo apt install git
 git init
 git add README.md ip_kara_liste.sh bildirim_engellenen_ipler.sh jail.local
 git commit -m "Add project report and files"
-git remote add origin https://github.com/KULLANICI/ssh-guvenlik-projesi.git
+git remote add origin https://github.com/KemalAlihan/ssh-guvenlik-projesi.git
 git push -u origin main
 ```
