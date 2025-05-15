@@ -35,3 +35,74 @@ Bu proje, SSH sunucusuna yapılan brute-force saldırılarını tespit ederek IP
   sudo apt install openssh-server
   sudo systemctl enable ssh
   sudo systemctl start ssh
+
+## Fail2Ban Kurulumu:
+
+    sudo apt install fail2ban
+
+  /etc/fail2ban/jail.local yapılandırması:
+  ini
+
+  -[sshd]
+  -enabled = true
+  -port = 22
+  -maxretry = 3
+  -bantime = 600
+  -findtime = 600
+
+## Servis başlatma:
+
+    sudo systemctl enable fail2ban
+    sudo systemctl start fail2ban
+
+## iptables Kurulumu:
+
+    sudo iptables -N BLACKLIST
+    sudo iptables -A BLACKLIST -j DROP
+    sudo iptables -A INPUT -j BLACKLIST
+    sudo iptables -A BLACKLIST -s <blacklist_ip> -j DROP
+    sudo apt install iptables-persistent
+    sudo dpkg-reconfigure iptables-persistent
+
+### 3.3. Bash Betikleri
+  ip_kara_liste.sh: IP’leri iptables ile engeller.
+  
+
+#!/bin/bash
+#ip_kara_liste.sh
+
+BLACKLIST_IP=$1
+if [ -z "$BLACKLIST_IP" ]; then
+    echo "Hata: Engellenecek IP adresini belirtin."
+    exit 1
+fi
+sudo iptables -A BLACKLIST -s "$BLACKLIST_IP" -j DROP
+echo "IP $BLACKLIST_IP engellendi."
+
+bildirim_engellenen_ipler.sh: Engellenen IP’ler için e-posta bildirimi gönderir.
+bash
+
+#!/bin/bash
+# bildirim_engellenen_ipler.sh
+    BLACKLIST_IP=$1
+    RECIPIENT="ornek@email.com"
+    SUBJECT="IP Engelleme Bildirimi"
+    BODY="IP $BLACKLIST_IP SSH brute-force nedeniyle engellendi."
+    echo "$BODY" | mail -s "$SUBJECT" "$RECIPIENT"
+
+## Cron Job: Bildirim betiğini her 5 dakikada çalıştırmak için:
+    crontab -e
+    */5 * * * * /path/to/bildirim_engellenen_ipler.sh <blacklist_ip>
+
+### 4. Test ve Sonuçlar
+  -Brute-Force Testi: Yerel makineden ssh invalid-user@<vm_ip> ile 3 başarısız giriş denendi.
+
+  -Fail2Ban Logları: /var/log/fail2ban.log incelenerek IP engelleme doğrulandı.
+
+  -iptables Çıktısı: sudo iptables -L ile engellenen IP’ler kontrol edildi.
+
+  -Bildirim Testi: E-posta bildirimi alındı.
+
+  -Sonuç: VirtualBox ortamında SSH güvenliği sağlandı, IP’ler başarıyla engellendi.
+
+
