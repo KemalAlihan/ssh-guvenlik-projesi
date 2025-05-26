@@ -131,19 +131,3 @@ Proje dosyaları:
 
 Proje, VirtualBox üzerinde Ubuntu Server kullanılarak SSH güvenliğini artırmak için Fail2Ban ve iptables ile IP kara listesi oluşturmayı başardı. Bildirim sistemi, engellemelerin anlık takibini mümkün kıldı.
 
-## Raporu GitHub’a Yükleme
-
-### 1. Dosyaları Hazırlayın:
-- `README.md`: Yukarıdaki içeriği kopyalayın ve düzenleyin.
-- `ip_kara_liste.sh` ve `bildirim_engellenen_ipler.sh`: Yukarıdaki betikleri oluşturun.
-- `jail.local`: Fail2Ban yapılandırma dosyasını kopyalayın.
-
-### 2. Git Komutları:
-```bash
-sudo apt install git
-git init
-git add README.md ip_kara_liste.sh bildirim_engellenen_ipler.sh jail.local
-git commit -m "Add project report and files"
-git remote add origin https://github.com/KemalAlihan/ssh-guvenlik-projesi.git
-git push -u origin main
-```
