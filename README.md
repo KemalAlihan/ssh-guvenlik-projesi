@@ -23,10 +23,10 @@ Bu proje, SSH sunucusuna yapılan brute-force saldırılarını tespit ederek IP
 - Ubuntu Server 22.04 ISO dosyası indirildi.
 - VirtualBox’ta yeni bir sanal makine oluşturuldu:
   - Ad: ssh-security-vm
-  - RAM: 2 GB
-  - Disk: 20 GB
+  - RAM: 4 GB
+  - Disk: 25 GB
   - Ağ: NAT veya Bridged Adapter (yerel ağ testi için)
-- Ubuntu Server kurulumu tamamlandı, kullanıcı adı `ubuntu` ve parola belirlendi.
+- Ubuntu Server kurulumu tamamlandı, kullanıcı adı `ogr` ve parola belirlendi.
 
 **SSH Erişimi:**
 - Sanal makinenin IP adresi kontrol edildi:
